@@ -1,0 +1,2 @@
+# Flashcard App
+Flashcard application for English-speakers learning a new language. A fun personal project to assist in my own language learning journey while learning OOP, DB management, and web development along the way.
