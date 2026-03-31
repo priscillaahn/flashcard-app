@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flashcard_app"
+version = "0.1"
+dependencies = [
+    "pandas >= 3.0.0",
+    "dataclasses"
+]
+
+[tool.setuptools.packages.find]
+namespaces = false 
