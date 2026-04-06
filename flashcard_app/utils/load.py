@@ -36,7 +36,7 @@ def load_cards_from_csv(csv_filepath: str, lang_front: str, lang_back: str) -> l
                 text=str(row.back),
                 language=lang_tag_back,
                 ),
-            part_of_speech=str(row.part_of_speech),
+            part_of_speech=str(row.part_of_speech) if pd.notna(row.part_of_speech) else None,
             tags=convert_tags_to_list(str(row.tags)) if pd.notna(row.tags) else []
         )
         cards.append(card)
