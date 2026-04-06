@@ -3,6 +3,7 @@ from typing import Optional
 import pandas as pd
 
 from flashcard_app.models.flashcards import CardSide, Card, Deck
+from flashcard_app.utils.language import standardize_language_input
 
 
 def load_csv(csv_filepath: str) -> pd.DataFrame:
@@ -20,17 +21,20 @@ def convert_tags_to_list(tags_str: str) -> list[str]:
 def load_cards_from_csv(csv_filepath: str, lang_front: str, lang_back: str) -> list[Card]:
     """Creates a list of card objects from a csv."""
     data = load_csv(csv_filepath=csv_filepath)
+    
+    lang_tag_front = standardize_language_input(lang_front)
+    lang_tag_back = standardize_language_input(lang_back)
 
     cards: list[Card] = []
     for row in data.itertuples(index=False):
         card = Card(
             front=CardSide(
                 text=str(row.front),
-                language=lang_front,
+                language=lang_tag_front,
             ),
             back=CardSide(
                 text=str(row.back),
-                language=lang_back,
+                language=lang_tag_back,
                 ),
             part_of_speech=str(row.part_of_speech),
             tags=convert_tags_to_list(str(row.tags)) if pd.notna(row.tags) else []
